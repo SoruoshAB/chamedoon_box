@@ -5,7 +5,7 @@ django based api's
 ## Installation 
 cd into chosen directory and clone the latest project
 ```bash
-git clone http://gitlab.chamedon.me/Soroushi/box-backend.git
+git clone https://github.com/SoruoshAB/chamedoon_box.git
 ```
 create a .env file just like sample.env
 
