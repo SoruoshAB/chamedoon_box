@@ -1,0 +1,75 @@
+version: "3"
+
+services:
+  box_gunicorn:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: boxdjango
+    volumes:
+      - .:/box-backend:consistent
+      - /mnt:/mnt
+      - box_static:/box-backend/static_back:consistent
+    restart: always
+    ports:
+      - "8000:8000"
+    networks:
+      - postgres_network
+      - nginx_network
+      - redis_network
+    depends_on:
+      - box_postgres
+  box_postgres:
+    image: postgres:13-alpine
+    container_name: box_postgres
+    volumes:
+      - box_postgres:/var/lib/postgresql/data:consistent
+    restart: always
+    env_file: .env
+    ports:
+      - "5432:5432"
+    networks:
+      - postgres_network
+  box_redis:
+    image: redis:alpine
+
+    container_name: box_redis
+    networks:
+      - redis_network
+    restart: always
+    ports:
+      - "6379:6379"
+  box_nginx:
+    container_name: boxnginx
+    build:
+      context: ./config
+      dockerfile: Dockerfile
+    ports:
+      - "80:80"
+    volumes:
+      - /mnt:/mnt
+      - box_static:/box-backend/static_back:consistent
+    networks:
+      - nginx_network
+    restart: always
+  front:
+    image: rezapazan/chamedoon-front:1.0.0
+    container_name: front
+    restart: always
+    ports:
+      - "3000:3000"
+    networks:
+      - nginx_network
+
+volumes:
+  box_postgres:
+    external: true
+  box_static:
+    external: true
+networks:
+  postgres_network:
+    external: true
+  nginx_network:
+    external: true
+  redis_network:
+    external: true
