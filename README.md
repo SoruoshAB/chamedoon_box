@@ -7,7 +7,7 @@ cd into chosen directory and clone the latest project
 ```bash
 git clone https://github.com/SoruoshAB/chamedoon_box.git
 ```
-create a .env file just like sample.env
+create a `.env` file just like `sample.env`
 
 pull required docker images 
 
