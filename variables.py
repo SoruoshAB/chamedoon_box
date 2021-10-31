@@ -1,11 +1,11 @@
-ip_sever = "http://37.152.182.80/api/box"
-company_id = "1"
+ip_sever = "http://*******.com/api/box"
+company_id = "*"
 
 
 class variables:
     def __init__(self):
-        self.ip_box = "192.168.255.252"
-        self.api_downloader = "http://192.168.255.252:7070/queue"
+        self.ip_box = "*.*.**.*"
+        self.api_downloader = "http://*.*.*.*.*:7070/queue"
         self.api_get_comment = ip_sever + "/VideoComments/video_id/page"
         self.api_post_comment = ip_sever + "/VideoComments"
         self.api_post_like_comment = ip_sever + "/VideoCommentLike"
